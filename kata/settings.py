@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'contacts',
     'django_forms_bootstrap',
+    'django_gravatar',
+
 ]
 
 MIDDLEWARE = [
