@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static from staticfiles %}
 {#{% load gravatar %}#}
 {#{% load bootstrap_tags %}#}
 
@@ -7,14 +7,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Kata People</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="{% static "css/mycss.css" %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="{% static "favicon/favicon.ico" %}">
 </head>
+
 <body>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Kata</a>
+      <a class="navbar-brand" href="{% url 'home' %}">Kata</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
@@ -22,8 +24,13 @@
       <li><a href="#">Page 2</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> Profile </a></li>
+            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+        {% else %}
+            <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up </a></li>
+            <li><a href="{% url 'login' %}?next={% url 'profile' %}"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+         {% endif %}
     </ul>
   </div>
 </nav>
@@ -34,6 +41,7 @@
 
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+{# <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>#}
 </html>

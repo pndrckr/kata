@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from contacts.views import index
+from contacts.views import home
+from .settings import MEDIA_ROOT
+from django.views.static import serve
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', index, name='index'),
+    url(r'^$', home, name='home'),
     url(r'', include('contacts.urls')),
+url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 ]
